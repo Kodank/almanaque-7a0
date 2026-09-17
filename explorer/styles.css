@@ -133,13 +133,14 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
 .filters select {
   appearance: none;
   -webkit-appearance: none;
-  background: var(--white);
+  color-scheme: light;
   border: 2px solid var(--green);
   border-radius: 12px;
   padding: 10px 36px 10px 12px;
   min-height: 44px;
   font-weight: 700;
   color: var(--ink);
+  background-color: var(--white);
   background-image:
     linear-gradient(45deg, transparent 50%, var(--green) 50%),
     linear-gradient(135deg, var(--green) 50%, transparent 50%);
@@ -148,6 +149,11 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
     calc(100% - 10px) calc(50% - 3px);
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
+}
+.filters select#f-pos {
+  background-color: var(--white);
+  color: var(--ink);
+  border-color: var(--green);
 }
 .filters label.chk {
   display: flex;

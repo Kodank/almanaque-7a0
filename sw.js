@@ -1,5 +1,5 @@
 /* global self, caches, fetch */
-var CACHE = "almanaque-7a0-v7";
+var CACHE = "almanaque-7a0-v8";
 var PRECACHE = [
   "./consultar.html",
   "./explorer/styles.css",
