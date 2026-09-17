@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-title" content="Almanaque 7a0" />
   <title>Almanaque 7a0 — consultar overalls</title>
   <link rel="manifest" href="explorer/manifest.webmanifest" />
-  <link rel="stylesheet" href="explorer/styles.css?v=8" />
+  <link rel="stylesheet" href="explorer/styles.css?v=9" />
 </head>
 <body>
   <div class="app">
@@ -52,6 +52,7 @@
         </select>
         <label class="ovr-range">Overall mín. <input id="f-ovr" type="range" min="64" max="99" value="64" /> <b id="f-ovr-label">64+</b></label>
         <label class="chk"><input id="f-legends" type="checkbox" /> Só lendas ★</label>
+        <label class="chk"><input id="f-hide-ovr" type="checkbox" /> Ocultar overall</label>
         <button type="button" class="clear-btn" id="f-clear">Limpar filtros</button>
         <span class="count" id="count"></span>
       </div>
@@ -64,7 +65,7 @@
   <aside class="drawer" id="drawer"></aside>
 
   <script src="explorer/data.js"></script>
-  <script src="explorer/app.js?v=8"></script>
+  <script src="explorer/app.js?v=9"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("./sw.js");

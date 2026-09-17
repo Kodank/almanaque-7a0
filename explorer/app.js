@@ -54,6 +54,7 @@
     pos: "",
     minOvr: 64,
     legends: false,
+    hideOvr: false,
     foot: "",
     limit: 80,
     teamBrowse: "",
@@ -90,6 +91,13 @@
     if (n >= 88) return "ovr ovr-92";
     if (n >= 80) return "ovr ovr-87";
     return "ovr ovr-low";
+  }
+  function ovrBadge(n) {
+    if (state.hideOvr) return "<span class='ovr ovr-hidden'>??</span>";
+    return "<span class='" + ovrClass(n) + "'>" + n + "</span>";
+  }
+  function ovrText(n) {
+    return state.hideOvr ? "??" : String(n);
   }
   function esc(s) {
     return String(s)
@@ -161,7 +169,7 @@
       "</tr></thead><tbody>";
     shown.forEach(function (p) {
       html += "<tr data-id='" + esc(p.i) + "' data-y='" + p.y + "' data-t='" + esc(p.t) + "'>" +
-        "<td><span class='" + ovrClass(p.o) + "'>" + p.o + "</span></td>" +
+        "<td>" + ovrBadge(p.o) + "</td>" +
         "<td><div class='name'>" + esc(p.n) + "</div><div class='meta'>#" + (p.k || "—") + "</div></td>" +
         "<td><span class='pos-pill'>" + esc(posName(p.p[0])) + "</span>" + footPill(p.f) + "</td>" +
         "<td>" + flag(p.t) + " " + esc(teamName(p.t)) + "</td>" +
@@ -188,7 +196,7 @@
     shown.forEach(function (p, i) {
       html += "<tr data-id='" + esc(p.i) + "' data-y='" + p.y + "' data-t='" + esc(p.t) + "'>" +
         "<td class='num meta'>" + (i + 1) + "</td>" +
-        "<td><span class='" + ovrClass(p.o) + "'>" + p.o + "</span></td>" +
+        "<td>" + ovrBadge(p.o) + "</td>" +
         "<td><div class='name'>" + esc(p.n) + "</div><div class='meta'>" + esc(posName(p.p[0])) +
         (p.f ? " · " + footLabel(p.f) : "") + "</div></td>" +
         "<td>" + flag(p.t) + " " + esc(teamName(p.t)) + " · " + p.y + "</td>" +
@@ -235,10 +243,9 @@
         "<div class='grid'>";
       cups.forEach(function (s) {
         html += "<button class='card' data-open-cup='" + s.y + "'>" +
-          "<div class='cup-row'><h3>" + s.y + "</h3><span class='" + ovrClass(Math.round(s.avg)) + "'>" +
-          s.avg.toFixed(0) + "</span></div>" +
+          "<div class='cup-row'><h3>" + s.y + "</h3>" + ovrBadge(Math.round(s.avg)) + "</div>" +
           "<div class='sub'>" + s.n + " jogadores · " + s.lg + " lenda" + (s.lg === 1 ? "" : "s") +
-          " · máximo " + s.mx + "</div></button>";
+          (state.hideOvr ? "" : " · máximo " + s.mx) + "</div></button>";
       });
       html += "</div>";
       $("main").innerHTML = html;
@@ -254,7 +261,7 @@
       "<div class='squad-head'><div><h2>" + flag(state.teamBrowse) + " " +
       esc(teamName(state.teamBrowse)) + " " + year + "</h2>" +
       "<p class='meta'>" + squad.length + " jogadores" +
-      (meta ? " · média " + meta.avg.toFixed(1) + " · " + meta.lg + " lendas" : "") +
+      (meta ? (state.hideOvr ? " · " + meta.lg + " lendas" : " · média " + meta.avg.toFixed(1) + " · " + meta.lg + " lendas") : "") +
       "</p></div></div>";
 
     LINES.forEach(function (line) {
@@ -263,7 +270,7 @@
       html += "<section class='line'><h3>" + line.title + "</h3>";
       group.forEach(function (p) {
         html += "<div class='player-row' data-id='" + esc(p.i) + "' data-y='" + p.y + "' data-t='" + esc(p.t) + "'>" +
-          "<span class='" + ovrClass(p.o) + "'>" + p.o + "</span>" +
+          ovrBadge(p.o) +
           "<span class='meta'>#" + (p.k || "—") + "</span>" +
           "<div><div class='name'>" + esc(p.n) + (p.l ? " <span class='star'>★</span>" : "") +
           "</div><div class='meta'>" + p.p.map(posName).join(" · ") + "</div></div>" +
@@ -285,7 +292,7 @@
       "<button class='close' id='close-drawer'>Fechar</button>" +
       "<div class='eyebrow'>" + flag(best.t) + " " + esc(teamName(best.t)) + "</div>" +
       "<h2>" + esc(best.n) + (career.some(function (p) { return p.l; }) ? " <span class='star'>★</span>" : "") + "</h2>" +
-      "<p class='meta'>Melhor overall: <b>" + best.o + "</b> em " + best.y +
+      "<p class='meta'>Melhor overall: <b>" + ovrText(best.o) + "</b> em " + best.y +
       " · " + career.length + " Copa" + (career.length === 1 ? "" : "s") +
       (best.f ? " · " + footLabel(best.f) : "") + "</p>" +
       "<div class='career'>" +
@@ -296,7 +303,7 @@
           "<div class='meta'>" + p.p.map(posName).join(" · ") +
           (p.k ? " · #" + p.k : "") +
           (p.f ? " · " + footLabel(p.f) : "") + "</div></div>" +
-          "<div><span class='" + ovrClass(p.o) + "'>" + p.o + "</span>" +
+          "<div>" + ovrBadge(p.o) +
           (p.l ? " <span class='star'>★</span>" : "") + "</div></div>";
       }).join("") + "</div>";
     $("drawer").classList.add("open");
@@ -361,6 +368,10 @@
     $("f-legends").addEventListener("change", function (e) {
       state.legends = e.target.checked;
       state.limit = 80;
+      render();
+    });
+    $("f-hide-ovr").addEventListener("change", function (e) {
+      state.hideOvr = e.target.checked;
       render();
     });
     document.querySelectorAll(".tab").forEach(function (btn) {

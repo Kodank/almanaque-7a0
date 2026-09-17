@@ -205,6 +205,7 @@ tbody tr:hover { background: #fff8e6; }
 .ovr-92, .ovr-91, .ovr-90, .ovr-89, .ovr-88 { background: #143322; color: #b7e0c4; }
 .ovr-87, .ovr-86, .ovr-85, .ovr-84, .ovr-83, .ovr-82, .ovr-81, .ovr-80 { background: #e8f0ea; color: #1b4d34; }
 .ovr-low { background: #f0ece3; color: #5c665f; }
+.ovr-hidden { background: var(--paper-2); color: var(--muted); }
 .star { color: var(--gold); font-size: 13px; }
 .name { font-weight: 700; }
 .meta { color: var(--muted); font-size: 13px; }
