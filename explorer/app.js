@@ -108,14 +108,16 @@
 
     var teamSel = $("f-team");
     var cupSel = $("f-cup");
-    var posSel = $("f-pos");
     data.teams.forEach(function (t) {
       teamSel.appendChild(new Option(t.pt, t.c));
     });
     cups.forEach(function (y) { cupSel.appendChild(new Option(String(y), String(y))); });
+    var chips = $("pos-chips");
+    var html = "<button type='button' class='pos-chip active' data-pos=''>Todas</button>";
     Object.keys(POS).forEach(function (code) {
-      posSel.appendChild(new Option(POS[code], code));
+      html += "<button type='button' class='pos-chip' data-pos='" + code + "'>" + code + "</button>";
     });
+    chips.innerHTML = html;
 
     $("stat-players").textContent = data.players.length.toLocaleString("pt-BR");
     $("stat-unique").textContent = Object.keys(byPlayer).length.toLocaleString("pt-BR");
@@ -308,8 +310,18 @@
     $("drawer-bg").classList.remove("open");
   }
 
+  function renderPosChips() {
+    var chips = $("pos-chips");
+    var elencos = state.view === "elencos";
+    chips.hidden = elencos;
+    Array.prototype.forEach.call(chips.querySelectorAll(".pos-chip"), function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-pos") === state.pos);
+    });
+  }
+
   function render() {
     renderTabs();
+    renderPosChips();
     var box = $("filters-box");
     var elencos = state.view === "elencos";
     if (box) {
@@ -333,7 +345,13 @@
     });
     $("f-team").addEventListener("change", function (e) { state.team = e.target.value; state.limit = 80; render(); });
     $("f-cup").addEventListener("change", function (e) { state.cup = e.target.value; state.limit = 80; render(); });
-    $("f-pos").addEventListener("change", function (e) { state.pos = e.target.value; state.limit = 80; render(); });
+    $("pos-chips").addEventListener("click", function (e) {
+      var btn = e.target.closest(".pos-chip");
+      if (!btn) return;
+      state.pos = btn.getAttribute("data-pos") || "";
+      state.limit = 80;
+      render();
+    });
     $("f-foot").addEventListener("change", function (e) { state.foot = e.target.value; state.limit = 80; render(); });
     $("f-ovr").addEventListener("input", function (e) {
       state.minOvr = Number(e.target.value);
