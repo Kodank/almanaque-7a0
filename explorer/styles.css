@@ -108,15 +108,13 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
   border-color: var(--green-2);
 }
 
-.filters-toolbar {
+.filters {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   margin-bottom: 18px;
 }
-.filters-toolbar[hidden] { display: none !important; }
-.filters-toggle { display: none; }
 .clear-btn {
   position: relative;
   z-index: 6;
@@ -132,14 +130,6 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
   touch-action: manipulation;
 }
 .clear-btn:hover { background: var(--paper-2); }
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin-bottom: 0;
-}
 .filters select {
   appearance: none;
   -webkit-appearance: none;
@@ -414,35 +404,13 @@ tbody tr:hover { background: #fff8e6; }
     padding: 10px 8px;
   }
 
-  .filters-toolbar {
-    margin-bottom: 0;
-  }
-  .filters-toggle {
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 44px;
-    padding: 10px 14px;
-    color: var(--green-2);
-    font-weight: 700;
-    cursor: pointer;
-    background: var(--white);
-    border: 2px solid var(--green);
-    border-radius: 12px;
-  }
-  .filters-toggle::after { content: "▾"; font-weight: 400; }
-  .filters-toggle[aria-expanded="true"]::after { content: "▴"; }
   .filters {
-    display: none;
-    width: 100%;
-    flex-basis: 100%;
-    padding-bottom: 8px;
+    margin-bottom: 10px;
   }
-  .filters.is-open { display: flex; }
   .filters select,
   .filters label.chk,
-  .filters label.ovr-range {
+  .filters label.ovr-range,
+  .filters .clear-btn {
     flex: 1 1 calc(50% - 8px);
     min-height: 44px;
     min-width: 0;

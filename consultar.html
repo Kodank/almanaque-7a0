@@ -40,23 +40,20 @@
         <button class="tab" data-view="ranking">Ranking</button>
       </nav>
 
-      <div class="filters-toolbar" id="filters-toolbar">
-        <button type="button" class="filters-toggle" id="filters-toggle">Filtros</button>
+      <div class="filters" id="filters">
+        <select id="f-team"><option value="">Todas as seleções</option></select>
+        <select id="f-cup"><option value="">Todas as Copas</option></select>
+        <select id="f-pos"><option value="">Posição</option></select>
+        <select id="f-foot">
+          <option value="">Pé (zagueiros)</option>
+          <option value="destro">Destro</option>
+          <option value="canhoto">Canhoto</option>
+          <option value="ambos">Ambos</option>
+        </select>
+        <label class="ovr-range">Overall mín. <input id="f-ovr" type="range" min="64" max="99" value="64" /> <b id="f-ovr-label">64+</b></label>
+        <label class="chk"><input id="f-legends" type="checkbox" /> Só lendas ★</label>
         <button type="button" class="clear-btn" id="f-clear">Limpar filtros</button>
-        <div class="filters" id="filters">
-          <select id="f-team"><option value="">Todas as seleções</option></select>
-          <select id="f-cup"><option value="">Todas as Copas</option></select>
-          <select id="f-pos"><option value="">Posição</option></select>
-          <select id="f-foot">
-            <option value="">Pé (zagueiros)</option>
-            <option value="destro">Destro</option>
-            <option value="canhoto">Canhoto</option>
-            <option value="ambos">Ambos</option>
-          </select>
-          <label class="ovr-range">Overall mín. <input id="f-ovr" type="range" min="64" max="99" value="64" /> <b id="f-ovr-label">64+</b></label>
-          <label class="chk"><input id="f-legends" type="checkbox" /> Só lendas ★</label>
-          <span class="count" id="count"></span>
-        </div>
+        <span class="count" id="count"></span>
       </div>
     </div>
 

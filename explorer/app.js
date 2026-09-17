@@ -330,20 +330,13 @@
 
   function render() {
     renderTabs();
-    var bar = $("filters-toolbar");
-    var elencos = state.view === "elencos";
-    if (bar) bar.hidden = elencos;
+    $("filters").style.display = state.view === "elencos" ? "none" : "flex";
     if (state.view === "buscar") renderBuscar();
     else if (state.view === "ranking") renderRanking();
     else renderElencos();
   }
 
   function bind() {
-    $("filters-toggle").addEventListener("click", function (e) {
-      e.preventDefault();
-      var open = $("filters").classList.toggle("is-open");
-      $("filters-toggle").setAttribute("aria-expanded", open ? "true" : "false");
-    });
     document.addEventListener("click", function (e) {
       if (!e.target.closest("#f-clear")) return;
       e.preventDefault();
