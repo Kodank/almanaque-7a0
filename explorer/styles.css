@@ -157,13 +157,16 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
 }
 .filters label.chk {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 8px 10px;
-  color: var(--ink-soft);
+  background-color: var(--white);
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
 }
 .ovr-range { display: flex; align-items: center; gap: 8px; color: var(--ink-soft); }
 .ovr-range input[type="range"] { width: 120px; }
