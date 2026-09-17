@@ -330,24 +330,26 @@
 
   function render() {
     renderTabs();
-    var box = $("filters-box");
     var bar = $("filters-toolbar");
     var elencos = state.view === "elencos";
     if (bar) bar.hidden = elencos;
-    if (box) {
-      box.hidden = elencos;
-      if (!elencos && window.matchMedia("(min-width: 721px)").matches) box.open = true;
-    }
-    $("filters").style.display = elencos ? "none" : "flex";
     if (state.view === "buscar") renderBuscar();
     else if (state.view === "ranking") renderRanking();
     else renderElencos();
   }
 
   function bind() {
-    if (window.matchMedia("(min-width: 721px)").matches) {
-      $("filters-box").open = true;
-    }
+    $("filters-toggle").addEventListener("click", function (e) {
+      e.preventDefault();
+      var open = $("filters").classList.toggle("is-open");
+      $("filters-toggle").setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("#f-clear")) return;
+      e.preventDefault();
+      e.stopPropagation();
+      clearFilters();
+    }, true);
     $("q").addEventListener("input", function (e) {
       state.q = e.target.value;
       state.limit = 80;
@@ -368,7 +370,6 @@
       state.limit = 80;
       render();
     });
-    $("f-clear").addEventListener("click", clearFilters);
     document.querySelectorAll(".tab").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.view = btn.getAttribute("data-view");
