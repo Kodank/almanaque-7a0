@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0e2a1c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Almanaque 7a0" />
+  <title>Almanaque 7a0 — consultar overalls</title>
+  <link rel="manifest" href="explorer/manifest.webmanifest" />
+  <link rel="stylesheet" href="explorer/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <div class="eyebrow">7a0 · 1950–2026</div>
+        <h1>Almanaque <span>7–0</span></h1>
+        <p>Busque um jogador, abra o elenco de uma seleção ou veja o ranking de overalls. Clique em qualquer nome para ver todas as Copas dele.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><b id="stat-players">—</b><span>aparições</span></div>
+        <div class="stat"><b id="stat-unique">—</b><span>jogadores</span></div>
+        <div class="stat"><b id="stat-squads">—</b><span>elencos</span></div>
+        <div class="stat"><b id="stat-legends">—</b><span>lendas</span></div>
+      </div>
+    </header>
+
+    <div class="chrome">
+      <div class="search-wrap">
+        <span class="lens" aria-hidden="true">⌕</span>
+        <input id="q" type="search" enterkeyhint="search" placeholder="Jogador, seleção ou Copa…" />
+      </div>
+
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-view="buscar">Buscar</button>
+        <button class="tab" data-view="elencos">Elencos</button>
+        <button class="tab" data-view="ranking">Ranking</button>
+      </nav>
+
+      <details class="filters-box" id="filters-box">
+        <summary>Filtros</summary>
+        <div class="filters" id="filters">
+          <select id="f-team"><option value="">Todas as seleções</option></select>
+          <select id="f-cup"><option value="">Todas as Copas</option></select>
+          <select id="f-pos"><option value="">Todas as posições</option></select>
+          <select id="f-foot">
+            <option value="">Pé (zagueiros)</option>
+            <option value="destro">Destro</option>
+            <option value="canhoto">Canhoto</option>
+            <option value="ambos">Ambos</option>
+          </select>
+          <label class="ovr-range">Overall mín. <input id="f-ovr" type="range" min="64" max="99" value="64" /> <b id="f-ovr-label">64+</b></label>
+          <label class="chk"><input id="f-legends" type="checkbox" /> Só lendas ★</label>
+          <span class="count" id="count"></span>
+        </div>
+      </details>
+    </div>
+
+    <main id="main"></main>
+  </div>
+
+  <div class="drawer-bg" id="drawer-bg"></div>
+  <aside class="drawer" id="drawer"></aside>
+
+  <script src="explorer/data.js"></script>
+  <script src="explorer/app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js");
+    }
+  </script>
+</body>
+</html>

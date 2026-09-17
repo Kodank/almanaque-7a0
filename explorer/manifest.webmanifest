@@ -1,0 +1,11 @@
+{
+  "name": "Almanaque 7a0",
+  "short_name": "7a0",
+  "description": "Consultar overalls, elencos e ranking do 7a0",
+  "start_url": "../consultar.html",
+  "scope": "../",
+  "display": "standalone",
+  "background_color": "#f4efe3",
+  "theme_color": "#0e2a1c",
+  "lang": "pt-BR"
+}
