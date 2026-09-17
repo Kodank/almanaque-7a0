@@ -149,14 +149,6 @@ select, input[type="search"], input[type="text"] { font-size: 16px; }
   background-size: 6px 6px, 6px 6px;
   background-repeat: no-repeat;
 }
-.filters select#f-pos {
-  background-color: var(--green-2);
-  color: #f4efe3;
-  border-color: var(--green-2);
-  background-image:
-    linear-gradient(45deg, transparent 50%, #f4efe3 50%),
-    linear-gradient(135deg, #f4efe3 50%, transparent 50%);
-}
 .filters label.chk {
   display: flex;
   gap: 6px;
