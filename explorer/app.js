@@ -308,10 +308,32 @@
     $("drawer-bg").classList.remove("open");
   }
 
+  function clearFilters() {
+    state.q = "";
+    state.team = "";
+    state.cup = "";
+    state.pos = "";
+    state.foot = "";
+    state.minOvr = 64;
+    state.legends = false;
+    state.limit = 80;
+    $("q").value = "";
+    $("f-team").value = "";
+    $("f-cup").value = "";
+    $("f-pos").value = "";
+    $("f-foot").value = "";
+    $("f-ovr").value = "64";
+    $("f-ovr-label").textContent = "64+";
+    $("f-legends").checked = false;
+    render();
+  }
+
   function render() {
     renderTabs();
     var box = $("filters-box");
+    var bar = $("filters-toolbar");
     var elencos = state.view === "elencos";
+    if (bar) bar.hidden = elencos;
     if (box) {
       box.hidden = elencos;
       if (!elencos && window.matchMedia("(min-width: 721px)").matches) box.open = true;
@@ -346,6 +368,7 @@
       state.limit = 80;
       render();
     });
+    $("f-clear").addEventListener("click", clearFilters);
     document.querySelectorAll(".tab").forEach(function (btn) {
       btn.addEventListener("click", function () {
         state.view = btn.getAttribute("data-view");
